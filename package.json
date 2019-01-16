@@ -1,0 +1,16 @@
+{
+  "name": "electron_demo",
+  "version": "1.0.0",
+  "description": "Demo of electron",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "author": "milton-castillo",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^4.0.1",
+    "electron-packager": "^13.0.1"
+  }
+}

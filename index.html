@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <h1>Questions and answers</h1>
+    <div id="firstContainer"></div>
+    <div id="secondContainer" style="display: none"></div>
+    We are using node <script>document.write(process.versions.node)</script>,
+    Chrome <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>.
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="./scripts/jquery.min.js"></script>
+    <script src="./js/questionAnswers.js"></script>
+  </body>
+</html>
