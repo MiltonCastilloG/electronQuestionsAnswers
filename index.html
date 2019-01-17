@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Questions and answers</h1>
-    <div id="firstContainer"></div>
-    <div id="secondContainer" style="display: none"></div>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
-    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-    <script src="./scripts/jquery.min.js"></script>
-    <script src="./js/questionAnswers.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+    crossorigin="anonymous">
+  <title>Questions and answers</title>
+</head>
+
+<body class="container">
+  <div id="firstContainer">
+    <h1>Insert questions with your respective answers</h1>
+    <div class="row">
+      <div class="col-sm-12">
+        <textarea rows='4' col='50' class='newQuestion' id='newQuestion' style="width:100%;"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <input type='text' class='newAnswer' id='newAnswer'>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-12">
+        <a class="btn btn-success" id="goToGame">Go to game</a>
+        <a class="btn btn-primary" id="addQuestion">Add Question</a>
+      </div>
+    </div>
+  </div>
+  <div id="secondContainer" style="display: none;">
+    <h1>Insert questions with their respective answers</h1>
+  </div>
+  <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+  <script src="./scripts/jquery.min.js"></script>
+  <script src="./js/questionAnswers.js"></script>
+</body>
+
 </html>
