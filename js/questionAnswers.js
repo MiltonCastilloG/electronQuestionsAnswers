@@ -1,45 +1,54 @@
-questionsAnswers = [
-    {
-        question: "What do you do when giving yourself a good advice?",
-        answer: "Seldom follow it!"
-    },
-    {
-        question: "What do you do when you make The Queen of Hearts mad?",
-        answer: "Off with my head?"
-    },
-    {
-        question: "What's the name of the cat that has no body but has a head and has no head but has body?",
-        answer: "Cheshire"
-    }
-]
+var questionsAnswers = [];
 
 $("#addQuestion").on('click',function(e) {
     questionsAnswers.push({
         question: $("#newQuestion").val(),
-        answer:  $("#newAnswer").val()
+        answer:  $("#newAnswer").val().replace(/\s+$/, '')
     });
     $("#newQuestion").val("");
     $("#newAnswer").val("");
+    $("#ulQuestions").empty();
+    questionsAnswers.forEach( (element, i) => {                                                                                    
+        questionN = i +1;
+        $("#ulQuestions").append("<li><a onClick='setModifyQuestions("+i+")'>"+element.question+"</a></li>");
+    });
 });
 
-$("#goToGame").on('click',function(e) {
+$("#startGameCustom").on('click',function(e) {
     $("#secondContainer").empty();
     questionsAnswers.forEach( (element, i) => {
+                                                                                                   
         questionN = i +1;
         $("#secondContainer").append("<div>"
             + "<a id='question"+i+"'>"+questionN+". "+element.question+"</a><br>"
-            + "<input type='text' class='answers' id='answer"+i+"' attr-number='"+i+"'>"
+            + "<input type='text' class='answers' id='answer"+i+"' attr-number='"+i+"'><a class='answerResult' id='result"+i+"'></a>"
             + "</div><br>"
         )
     });
     $(".answers").on('keypress',function(e) {
         if(e.which == 13) {
-            if($(this).val()== questionsAnswers[$(this).attr("attr-number")].answer)
-                console.log("Respuesta Correcta")
+            var answerNum = $(this).attr("attr-number");
+            if($(this).val().replace(/\s+$/, '')== questionsAnswers[answerNum].answer){
                 $(this).prop("disabled", true );
+                $("#result"+answerNum).html("&#10004");
+            }
+            else{
+                $("#result"+answerNum).html("&#10008");
+            }
         }
     });
     $("#firstContainer").css("display", "none");
     $("#secondContainer").css("display", "block");
 });
 
+function setModifyQuestions(number){
+    $("#newQuestion").val(questionsAnswers[number].question);
+    $("#newAnswer").val(questionsAnswers[number].answer);
+    $("#buttonContainer").append('<a class="btn btn-warning modify" onClick="modifyQuestion">Add Question</a>');
+}
+
+function modifyQuestion(number){
+    $("#newQuestion").val();
+    $("#newAnswer").val();
+    $("#buttonContainer").append('<a class="btn btn-warning modify" onClick="modifyQuestion">Add Question</a>');
+}

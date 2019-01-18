@@ -1,0 +1,27 @@
+nav.sidebar .navbar-brand, nav.sidebar .navbar-header{
+  text-align: center;
+  width: 100%;
+  margin-left: 0px;
+}
+
+nav.sidebar .navbar-nav > li{
+  border-bottom: 1px #e5e5e5 solid;
+}
+
+nav.sidebar{
+  height: 100%;
+  float: left;
+  margin-bottom: 0px;
+}
+
+nav.sidebar li {
+  width: 100%;
+}
+
+.navbar-nav a{
+  font-size:10px;
+}
+
+.navbar-nav>li>a {
+  padding: 5px;
+}
