@@ -44,11 +44,11 @@ $("#startGameCustom").on('click',function(e) {
 function setModifyQuestions(number){
     $("#newQuestion").val(questionsAnswers[number].question);
     $("#newAnswer").val(questionsAnswers[number].answer);
-    $("#buttonContainer").append('<a class="btn btn-warning modify" onClick="modifyQuestion">Add Question</a>');
+    $("#buttonContainer").append('<a class="btn btn-warning modify" onClick="modifyQuestion('+number+')">Add Question</a>');
 }
 
 function modifyQuestion(number){
     $("#newQuestion").val();
     $("#newAnswer").val();
-    $("#buttonContainer").append('<a class="btn btn-warning modify" onClick="modifyQuestion">Add Question</a>');
+    
 }
