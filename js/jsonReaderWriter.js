@@ -4,7 +4,8 @@ var electronDialog = remote.dialog;
  var selectedFile = "";
 $
 ("#selectFile").on('click',function(e) {
-    var newFile = electronDialog.showOpenDialog({ 
+    var newFile = electronDialog.showOpenDialog({
+        defaultPath: "./questionJSON",
         properties: ['openFile'],
         filters: [
             { name: 'Custom File Type', extensions: ['json'] },
@@ -27,3 +28,20 @@ function ReadFile(route) {
         });
     });
 }
+
+function WriteFile(content) {
+    var fileName = electronDialog.showSaveDialog({
+        defaultPath: "./questionJSON",
+        filters: [
+            {name: 'Custom File Type', extensions: ['json']},
+        ]
+    });
+    return new Promise((resolve, reject) =>{
+        electronFs.writeFile(fileName, content, (err) => {
+            if(err){
+                reject(err)
+            }        
+            resolve("The file has been succesfully saved");
+        });
+    });
+};

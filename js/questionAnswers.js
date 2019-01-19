@@ -5,6 +5,12 @@ $("#insertQuestionsLi").on('click',function(e) {
     $("#fileName").empty();
 })
 
+$("#saveSet").on('click', function(e) {
+    WriteFile(JSON.stringify(questionsAnswers)).then( (result) =>{
+        alert(result);
+    });
+})
+
 $("#addQuestion").on('click',function(e) {
     if($("#newQuestion").val().replace(/\s+$/, '')=='' || $("#newAnswer").val().replace(/\s+$/, '')==''){
         alert("Insert a question and an answer.")
