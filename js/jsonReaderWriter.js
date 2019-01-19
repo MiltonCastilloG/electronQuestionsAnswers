@@ -2,8 +2,8 @@ var remote = require('electron').remote;
 var electronFs = remote.require('fs');
 var electronDialog = remote.dialog;
  var selectedFile = "";
-$
-("#selectFile").on('click',function(e) {
+
+function ReadFile() {
     var newFile = electronDialog.showOpenDialog({
         defaultPath: "./questionJSON",
         properties: ['openFile'],
@@ -12,13 +12,9 @@ $
           ]
     });
     selectedFile = newFile[0];
-    $("#fileName").append(selectedFile);
-    $("#uploadJSON").css("display", "inline-block")
-});
 
-function ReadFile(route) {
     return new Promise((resolve, reject) =>{
-        electronFs.readFile(route, 'utf-8', (err, data) => {
+        electronFs.readFile(selectedFile, 'utf-8', (err, data) => {
             if(err){
                 alert("An error ocurred reading the file :" + err.message);
                 reject(err);

@@ -12,15 +12,13 @@
 </head>
 <body class="container">
   <h1>Quiz101</h1>
-  <div id="firstContainer">
-      <ul class="nav nav-tabs nav-justified">
-        <li class="active" id="insertQuestionsLi"><a data-toggle="tab" href="#insertQuestions">Insert own questions and answers</a></li>
-        <li><a data-toggle="tab" href="#loadJSON">Load JSON</a></li>
-      </ul>
-      <div class="tab-content">
-        <div id="insertQuestions" class="tab-pane fade in active">
+    <div id="firstContainer">
+        <div id="insertQuestions" style="padding-bottom: 10px;">
           <div class="row">
-              <div class="col-sm-3">
+            <div class="col-sm-12" >
+              <h2 class="title">Insert questions and answers</h2>
+            </div>
+              <div class="col-sm-4">
                   <nav class="navbar navbar-default sidebar" role="navigation">
                         <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                           <ul class="nav navbar-nav" id="ulQuestions">
@@ -29,8 +27,12 @@
                         </div>
                     </nav>
                 </div>
-                <div class="col-sm-9">
-                    <h3>Insert questions with your respective answers</h3>
+                <div class="col-sm-8">
+                    <div class="row" style="padding-bottom: 10px;">
+                      <div class="col-sm-12">
+                        <a class="btn btn-warning" id="selectJSON" style="width: 100%">Load JSON</a>
+                      </div>
+                    </div>
                     <div class="row">
                       <div class="col-sm-12">
                         <textarea rows='4' col='50' class='newQuestion' id='newQuestion' style="width:100%;"></textarea>
@@ -51,32 +53,16 @@
                 </div>
           </div>
         </div>
-        <div id="loadJSON" class="tab-pane fade">
-            <h3>Load a local JSON</h3>
-            <div class="row" style="padding-bottom: 5px;">
-              <div class="col-sm-12">
-                <a class="btn btn-warning" id="selectFile">Choose JSON</a>
-                <a id="fileName"></a>
-              </div>
-          </div>
-        </div>
-          <div class="row">
-            <div class="col-sm-12">
-              <a class="btn btn-primary" id="uploadJSON" style="display: none; padding-top: 10px;">Load JSON</a>
-            </div>
-          </div>
-        </div>
         <div class="row">
           <div class="col-sm-12">
             <a class="btn btn-success" id="startGame" style="width: 100%;">Go to game</a>
           </div>
         </div>
       </div>
-  </div>
-    
-  <div id="secondContainer" style="display: none;">
-    <h1>Insert questions with their respective answers</h1>
-  </div>
+    <div id="secondContainer" style="display: none">
+      <h2 class="title"><a href="#" style="color: #AD2A1A; text-decoration: none" id="returnToFirst">&#8617</a> Responde el questionario</h2>
+      <div id="gameMain"></div>
+    </div>
   <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
   <script src="./js/jsonReaderWriter.js"></script>
   <script src="./js/questionAnswers.js"></script>

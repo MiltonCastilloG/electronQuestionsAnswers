@@ -1,9 +1,9 @@
 var questionsAnswers = [];
 
-$("#insertQuestionsLi").on('click',function(e) {
-    $("#uploadJSON").css("display", "none");
-    $("#fileName").empty();
-})
+$("#returnToFirst").click(function(e) {
+    $("#firstContainer").css("display", "block");
+    $("#secondContainer").css("display", "none");
+});
 
 $("#saveSet").on('click', function(e) {
     WriteFile(JSON.stringify(questionsAnswers)).then( (result) =>{
@@ -28,11 +28,11 @@ $("#addQuestion").on('click',function(e) {
 });
 
 $("#startGame").on('click',function(e) {
-    $("#secondContainer").empty();
+    $("#gameMain").empty();
     questionsAnswers.forEach( (element, i) => {                                                                                       
         questionN = i +1;
-        $("#secondContainer").append("<div>"
-            + "<a id='question"+i+"'>"+questionN+". "+element.question+"</a><br>"
+        $("#gameMain").append("<div>"
+            + "<a style='text-decoration: none' id='question"+i+"'>"+questionN+". "+element.question+"</a><br>"
             + "<input type='text' class='answers' id='answer"+i+"' attr-number='"+i+"'><a class='answerResult' id='result"+i+"'></a>"
             + "</div><br>"
         )
@@ -53,19 +53,31 @@ $("#startGame").on('click',function(e) {
     $("#secondContainer").css("display", "block");
 });
 
-$("#uploadJSON").on('click',function(e) {
+$("#selectJSON").on('click',function(e) {
     ReadFile(selectedFile).then((results)=>{
-        questionsAnswers = $.parseJSON(results);
+        var parsedJSON = $.parseJSON(results);
+        var newQuestionsAnswers = [];
+        parsedJSON.forEach(function(value, index){
+            if(value.question != undefined && value.answer != undefined)
+                newQuestionsAnswers.push(value);
+        });
+        if(newQuestionsAnswers.length < parsedJSON.length && newQuestionsAnswers.length > 0){
+            questionsAnswers = newQuestionsAnswers;
+            alert("Filtered "+(parsedJSON.length-newQuestionsAnswers.length)+" elements with incopatible format")
+        }
+        else if (newQuestionsAnswers.length == 0)
+            alert("Failed to load JSON, no element found with keys question and answer")
+        else
+            questionsAnswers = newQuestionsAnswers;
         updateModifyQuestions();
     });
-    alert("JSON loaded successfully")
 });
 
 function setModifyQuestions(number){
     $(".modify").remove();
     $("#newQuestion").val(questionsAnswers[number].question);
     $("#newAnswer").val(questionsAnswers[number].answer);
-    $("#buttonContainer").append('<a class="btn btn-warning modify" onClick="modifyQuestion('+number+')">Modify Question</a>');
+    $("#buttonContainer").append('<a class="btn btn-info modify" onClick="modifyQuestion('+number+')">Modify Question</a>');
 }
 
 function modifyQuestion(number){
