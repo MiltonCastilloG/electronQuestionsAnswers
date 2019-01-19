@@ -1,23 +1,29 @@
 var questionsAnswers = [];
 
+$("#insertQuestionsLi").on('click',function(e) {
+    $("#uploadJSON").css("display", "none");
+    $("#fileName").empty();
+})
+
 $("#addQuestion").on('click',function(e) {
-    questionsAnswers.push({
-        question: $("#newQuestion").val(),
-        answer:  $("#newAnswer").val().replace(/\s+$/, '')
-    });
+    if($("#newQuestion").val().replace(/\s+$/, '')=='' || $("#newAnswer").val().replace(/\s+$/, '')==''){
+        alert("Insert a question and an answer.")
+    }
+    else{
+        questionsAnswers.push({
+            question: $("#newQuestion").val(),
+            answer:  $("#newAnswer").val().replace(/\s+$/, '')
+        });
+        updateModifyQuestions();
+    }
+    
     $("#newQuestion").val("");
     $("#newAnswer").val("");
-    $("#ulQuestions").empty();
-    questionsAnswers.forEach( (element, i) => {                                                                                    
-        questionN = i +1;
-        $("#ulQuestions").append("<li><a onClick='setModifyQuestions("+i+")'>"+element.question+"</a></li>");
-    });
 });
 
-$("#startGameCustom").on('click',function(e) {
+$("#startGame").on('click',function(e) {
     $("#secondContainer").empty();
-    questionsAnswers.forEach( (element, i) => {
-                                                                                                   
+    questionsAnswers.forEach( (element, i) => {                                                                                       
         questionN = i +1;
         $("#secondContainer").append("<div>"
             + "<a id='question"+i+"'>"+questionN+". "+element.question+"</a><br>"
@@ -41,14 +47,35 @@ $("#startGameCustom").on('click',function(e) {
     $("#secondContainer").css("display", "block");
 });
 
+$("#uploadJSON").on('click',function(e) {
+    ReadFile(selectedFile).then((results)=>{
+        questionsAnswers = $.parseJSON(results);
+        updateModifyQuestions();
+    });
+    alert("JSON loaded successfully")
+});
+
 function setModifyQuestions(number){
+    $(".modify").remove();
     $("#newQuestion").val(questionsAnswers[number].question);
     $("#newAnswer").val(questionsAnswers[number].answer);
-    $("#buttonContainer").append('<a class="btn btn-warning modify" onClick="modifyQuestion('+number+')">Add Question</a>');
+    $("#buttonContainer").append('<a class="btn btn-warning modify" onClick="modifyQuestion('+number+')">Modify Question</a>');
 }
 
 function modifyQuestion(number){
-    $("#newQuestion").val();
-    $("#newAnswer").val();
-    
+    questionsAnswers[number] = {
+        question: $("#newQuestion").val(),
+        answer: $("#newAnswer").val().replace(/\s+$/, '')
+    }
+    $(".modify").remove();
+    updateModifyQuestions();
+    $("#newQuestion").val(""),
+    $("#newAnswer").val("")
+}
+
+function updateModifyQuestions(){
+    $("#ulQuestions").empty();
+    questionsAnswers.forEach( (element, i) => {                                                                                    
+        $("#ulQuestions").append("<li><a onClick='setModifyQuestions("+i+")'>"+element.question+"</a></li>");
+    });
 }

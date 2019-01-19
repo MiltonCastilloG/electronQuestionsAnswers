@@ -14,9 +14,10 @@
   <h1>Quiz101</h1>
   <div id="firstContainer">
       <ul class="nav nav-tabs nav-justified">
-        <li class="active"><a data-toggle="tab" href="#insertQuestions">Insert own questions and answers</a></li>
+        <li class="active" id="insertQuestionsLi"><a data-toggle="tab" href="#insertQuestions">Insert own questions and answers</a></li>
         <li><a data-toggle="tab" href="#loadJSON">Load JSON</a></li>
       </ul>
+      <div class="tab-content">
         <div id="insertQuestions" class="tab-pane fade in active">
           <div class="row">
               <div class="col-sm-3">
@@ -30,7 +31,7 @@
                 </div>
                 <div class="col-sm-9">
                     <h3>Insert questions with your respective answers</h3>
-                    <div class="row" style="z-index: 30;">
+                    <div class="row">
                       <div class="col-sm-12">
                         <textarea rows='4' col='50' class='newQuestion' id='newQuestion' style="width:100%;"></textarea>
                       </div>
@@ -43,7 +44,6 @@
                     <br>
                     <div class="row">
                       <div class="col-sm-8" id="buttonContainer">
-                        <a class="btn btn-success" id="startGameCustom">Go to game</a>
                         <a class="btn btn-primary" id="addQuestion">Add Question</a>
                       </div>
                     </div>
@@ -51,9 +51,24 @@
           </div>
         </div>
         <div id="loadJSON" class="tab-pane fade">
-          <h3>Load a local JSON</h3>
-          <input type="file" accept=".json" id="jsonFILE">
-          <a class="btn btn-success" id="startGameJSON">Go to game</a>
+            <h3>Load a local JSON</h3>
+            <div class="row" style="padding-bottom: 5px;">
+              <div class="col-sm-12">
+                <a class="btn btn-warning" id="selectFile">Choose JSON</a>
+                <a id="fileName"></a>
+              </div>
+          </div>
+        </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <a class="btn btn-primary" id="uploadJSON" style="display: none; padding-top: 10px;">Load JSON</a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <a class="btn btn-success" id="startGame" style="width: 100%;">Go to game</a>
+          </div>
         </div>
       </div>
   </div>
